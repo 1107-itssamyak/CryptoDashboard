@@ -1,0 +1,20 @@
+{
+  "name": "cryptoboard-react",
+  "version": "1.0.0",
+  "description": "A crypto dashboard manager",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1107-itssamyak/CryptoDashboard.git"
+  },
+  "author": "samyak mehta, mananveer singh, tenzing namgyal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1107-itssamyak/CryptoDashboard/issues"
+  },
+  "homepage": "https://github.com/1107-itssamyak/CryptoDashboard#readme"
+}

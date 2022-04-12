@@ -1,12 +1,34 @@
 import React from 'react'
+import DashboardComponent from '../components/DashboardComponent';
+import MostVisitedDashboard from '../components/MostVisitedDashboard';
+import ProfileStat from '../components/ProfileStat';
+import RecentDashboard from '../components/RecentDashboard';
 
 function HomePage() {
     return (
         <>
-            <a href="login">login</a>
+            <div className="login">
+                <a href="login">login</a>
+            </div>
+            <div className="register">
+                <a href="/register">register</a>
+            </div>
+
+            <div className="user">
+                <div className="name">Name</div>
+            </div>
+
             <br />
-            <a href="/register">register</a>
+            <MostVisitedDashboard />
+
             <br />
+            <RecentDashboard />
+
+            <br />
+            <ProfileStat />
+
+            <br />
+            <DashboardComponent />
         </>
     )
 }

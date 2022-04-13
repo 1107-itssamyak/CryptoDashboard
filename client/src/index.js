@@ -16,7 +16,7 @@ root.render(
   </React.StrictMode>,
 )
 
-//* old way for react-dom rendering 
+// old way for react-dom rendering
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App />

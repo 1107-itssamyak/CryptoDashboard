@@ -15,7 +15,7 @@ function HomePage() {
             </div>
 
             <div className="user">
-                <div className="name">Name</div>
+                <div className="font-bold">Name</div>
             </div>
 
             <br />

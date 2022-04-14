@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import CurrencyContainer from '../components/CurrencyContainer.jsx';
 
 function NewPage() {
@@ -33,12 +34,14 @@ function NewPage() {
     return (
         <>
             <div className="home">
-                <a href="/">home</a>
+                <NavLink to={"/"}>home</NavLink>
+                {/* <a href="/">home</a> */}
             </div>
 
             <br />
             <div className="cancel">
-                <a href="/">cancel</a>
+                <NavLink to={"/"}>cancel</NavLink>
+                {/* <a href="/">cancel</a> */}
             </div>
 
             <br />

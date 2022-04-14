@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import avatar from '../svg/avatar.svg';
 import key from '../svg/key.svg';
 
@@ -21,7 +22,8 @@ function RegisterPage() {
 
     return (
         <>
-            <a href="/">home</a>
+            <NavLink to={"/"}>home</NavLink>
+            {/* <a href="/">home</a> */}
 
             <h1>Register to CryptoDashboard</h1>
             <form onSubmit={(e) => handleSubmit(e)}>

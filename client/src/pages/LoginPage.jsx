@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import avatar from '../svg/avatar.svg';
 import key from '../svg/key.svg';
 
@@ -27,7 +27,7 @@ function LoginPage() {
 
     return (
         <>
-            <a href="/">home</a>
+            <NavLink to={"/"}>home</NavLink>
 
             <h1>Login to CryptoDashboard</h1>
             <form onSubmit={(e) => handleSubmit(e)}>

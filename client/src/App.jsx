@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import NewPage from "./pages/NewPage";
-import Dashboard from "./components/Dashboard";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/new" element={<NewPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/" element={<HomePage />} />
             </Routes>
         </>

@@ -16,8 +16,8 @@ function DashboardPage(props) {
                 {props.data && <li>{props.data.currency}</li>}
             </ul>
 
-            <div className='border-2 p-4 bg-teal-700 mt-4'>Graphs 1</div>
-            <div className='border-2 p-4 bg-teal-700 mt-4'>Graphs 2</div>
+            <div>Graphs 1</div>
+            <div>Graphs 2</div>
         </div >
     )
 }

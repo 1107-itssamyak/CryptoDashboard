@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
-import wave_vector from '../svg/wave-vector.svg';
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
+import wave_vector from "../svg/wave-vector.svg";
 
 function RegisterPage() {
     const navigate = useNavigate();
@@ -16,51 +16,58 @@ function RegisterPage() {
         e.preventDefault();
 
         // The register function is to be registered here
-        navigate('/');
+        navigate("/");
     }
 
     return (
-        <div className='flex items-center justify-center flex-col h-screen'>
-            <NavLink to={"/"} className='absolute top-4 left-4 capitalize mx-4 py-2 px-6 rounded border-2 hover:bg-indigo-400  hover:text-white transition-all cursor-pointer'>home</NavLink>
+        <div>
+            <NavLink to={"/"}>home</NavLink>
 
-            <div className='border-2 py-8 px-12 mb-16 rounded-xl'>
-                <h1 className='font-bold text-xl m-2 mb-8'>Register to CryptoDashboard</h1>
-                <form
-                    onSubmit={(e) => handleSubmit(e)}>
+            <div className="border-2 py-8 px-12 mb-16 rounded-xl">
+                <h1 className="font-bold text-xl m-2 mb-8">
+                    Register to CryptoDashboard
+                </h1>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="input_email">
-                        <label htmlFor="email" className='font-semibold'>User Email ID</label>
+                        <label htmlFor="email" className="font-semibold">
+                            User Email ID
+                        </label>
                         <input
-                            className='border-2 my-2 w-full p-1 pl-2'
                             type="text"
                             id="email"
                             value={inputEmail}
-                            onChange={(e) => handleChange(e, setInputEmail)} />
+                            onChange={(e) => handleChange(e, setInputEmail)}
+                        />
                     </div>
                     <div className="input_password">
                         <label htmlFor="password">Password</label>
                         <input
-                            className='border-2 my-2 w-full p-1 pl-2'
                             type="password"
                             id="password"
                             value={inputPassword}
-                            onChange={(e) => handleChange(e, setInputPassword)} />
+                            onChange={(e) => handleChange(e, setInputPassword)}
+                        />
                     </div>
 
-                    <div className="already_a_user flex justify-end font-semibold w-full my-8">
-                        <a href="/register" className='italic text-blue-500 underline'>Already a user ?</a>
+                    <div>
+                        <a href="/register" className="italic text-blue-500 underline">
+                            Already a user ?
+                        </a>
                     </div>
 
-                    <div className="submit_section className='submit_section flex justify-center align-middle bg-green-400 text-black-500 my-4 p-2 rounded-md capitalize font-semibold'">
-                        <button type="submit" className='font-semibold'>Register</button>
+                    <div>
+                        <button type="submit" className="font-semibold">
+                            Register
+                        </button>
                     </div>
 
-                    <div className='absolute bottom-0 left-0 w-full'>
-                        <img src={wave_vector} alt="waves" className='w-full h-3/4' />
+                    <div className="absolute bottom-0 left-0 w-full">
+                        <img src={wave_vector} alt="waves" className="w-full h-3/4" />
                     </div>
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
 export default RegisterPage;

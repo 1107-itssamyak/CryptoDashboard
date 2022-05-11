@@ -35,13 +35,11 @@ function NewPage() {
         <>
             <div className="home">
                 <NavLink to={"/"}>home</NavLink>
-                {/* <a href="/">home</a> */}
             </div>
 
             <br />
             <div className="cancel">
                 <NavLink to={"/"}>cancel</NavLink>
-                {/* <a href="/">cancel</a> */}
             </div>
 
             <br />

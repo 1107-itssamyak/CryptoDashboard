@@ -22,7 +22,7 @@ function ProfileStat() {
 }
 
 const StyledDiv = styled.div`
-    margin: 2rem;
+    margin: 1rem 2rem;
     padding: 1rem;
     border-radius: .5rem;
     text-align: center;

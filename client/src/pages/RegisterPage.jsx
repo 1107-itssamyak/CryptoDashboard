@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import wave_vector from "../svg/wave-vector.svg";
 
-function RegisterPage() {
+function LoginPage() {
     const navigate = useNavigate();
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
@@ -15,59 +16,150 @@ function RegisterPage() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        // The register function is to be registered here
+        // checking from the database whether the user login is authenticated or not
         navigate("/");
     }
 
     return (
-        <div>
-            <NavLink to={"/"}>home</NavLink>
-
-            <div className="border-2 py-8 px-12 mb-16 rounded-xl">
-                <h1 className="font-bold text-xl m-2 mb-8">
-                    Register to CryptoDashboard
-                </h1>
+        <StyledWrapper>
+            <NavLink to="/" className="back-button">home</NavLink>
+            <StyledContainer>
+                <h1 className='text-xl font-bold italic'>Register to CryptoDashboard</h1>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="input_email">
-                        <label htmlFor="email" className="font-semibold">
-                            User Email ID
+                    <div className="input_email pt-8">
+                        <label
+                            className='font-semibold'
+                            htmlFor="email">
+                            Email
                         </label>
-                        <input
-                            type="text"
-                            id="email"
-                            value={inputEmail}
-                            onChange={(e) => handleChange(e, setInputEmail)}
-                        />
                     </div>
-                    <div className="input_password">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={inputPassword}
-                            onChange={(e) => handleChange(e, setInputPassword)}
-                        />
+                    <input
+                        type="text"
+                        id="email"
+                        value={inputEmail}
+                        onChange={(e) => handleChange(e, setInputEmail)}
+                    />
+
+                    <div className="input_password pt-4">
+                        <label
+                            className='font-semibold'
+                            htmlFor="password">
+                            Password
+                        </label>
                     </div>
 
-                    <div>
-                        <a href="/register" className="italic text-blue-500 underline">
-                            Already a user ?
-                        </a>
-                    </div>
+                    <input
+                        type="password"
+                        id="password"
+                        value={inputPassword}
+                        onChange={(e) => handleChange(e, setInputPassword)}
+                    />
 
-                    <div>
-                        <button type="submit" className="font-semibold">
-                            Register
-                        </button>
-                    </div>
+                    <StyledButtonContainer>
+                        <NavLink to="/login">already registered?</NavLink>
+                    </StyledButtonContainer>
 
-                    <div className="absolute bottom-0 left-0 w-full">
-                        <img src={wave_vector} alt="waves" className="w-full h-3/4" />
-                    </div>
+                    <StyledButtonContainer><button type="submit">Register</button></StyledButtonContainer>
                 </form>
-            </div>
-        </div>
+            </StyledContainer>
+            <img src={wave_vector} alt="waves" style={{ "position": "absolute", "bottom": "0" }} />
+        </StyledWrapper>
     );
 }
 
-export default RegisterPage;
+const StyledWrapper = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .back-button{
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        cursor: pointer;
+        text-transform: capitalize;
+        border-radius: .5rem;
+        padding: .25rem 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        &:hover{
+            background-color: #e0e0e0;
+            color: black;
+        }
+    }
+`;
+
+const StyledContainer = styled.div`
+    margin: 1rem;
+    margin-top: 10vh;
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: .5rem;
+
+    div {
+        padding-left: .25rem;
+        margin-bottom: .5rem;
+    }
+
+    input{
+        width: 18rem;
+        border: 2px solid #e0e0e0;
+        border-radius: .25rem;
+        padding: .25rem .5rem;
+
+        &:nth-child(2n){
+            margin-bottom: 1rem;
+        }
+    }
+
+    a{
+        font-size: 90%;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: right;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    button{
+        text-transform: capitalize;
+        border-radius: .5rem;
+        padding: .5rem 1.5rem;
+        margin: 1rem 0 0 0;
+        color: darkslateblue;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        &:hover{
+            background-color: #e0e0e0;
+            color: black;
+        }
+    }
+`;
+
+const StyledButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button{
+        cursor: pointer;
+        text-transform: capitalize;
+        border-radius: .5rem;
+        padding: .5rem 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        &:hover{
+            background-color: #e0e0e0;
+            color: black;
+        }
+    }
+    
+    &:last-child{
+        margin-bottom: 2rem;
+    }
+`;
+
+export default LoginPage;

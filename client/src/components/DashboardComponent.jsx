@@ -91,7 +91,8 @@ function DashboardComponent() {
 }
 
 const StyledHeader = styled.div`
-    width: 100%;
+    width: 90%;
+    align-self: center;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -125,6 +126,8 @@ const StyledHeader = styled.div`
 
 const StyledContainer = styled.div`
     flex: 0.8;
+    display: flex;
+    flex-direction: column;
 `;
 
 const StyledDashboardContainer = styled.div`

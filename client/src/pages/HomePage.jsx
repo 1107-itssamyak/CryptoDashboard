@@ -5,18 +5,23 @@ import ProfileStat from "../components/ProfileStat";
 import RecentDashboard from "../components/RecentDashboard";
 
 import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
 
 function HomePage() {
     return (
         <div className='flex flex-col'>
             <div>
                 <NavbarStyled>
-                    <a href="/" className="navbar__title"><span>CryptoBoard</span></a>
+                    <NavLink to="/" className="navbar__title">CryptoBoard</NavLink>
 
                     <div className="navbar__list">
-                        <li><a href="/login">login</a></li>
+                        <li>
+                            <NavLink to="/login">login</NavLink>
+                        </li>
 
-                        <li><a href="/register">register</a></li>
+                        <li>
+                            <NavLink to="/register">register</NavLink>
+                        </li>
 
                         <li>Name</li>
                     </div>

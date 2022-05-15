@@ -35,12 +35,12 @@ class AuthenticationHandler:
             await loop.run_in_executor(None, partial(json.dump, self.db, database, indent=4))
 
     @staticmethod
-    async def encryptPassword(password: str) -> str:
+    async def encryptString(password: str) -> str:
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, partial(hashpw, password, gensalt()))
 
     async def newUser(self, creds: dict) -> None:
-        self.db[creds["username"]] = await self.encryptPassword(creds["password"])
+        self.db[creds["username"]] = await self.encryptString(creds["password"])
 
     def checkExistingUser(self, username: str) -> bool:
         return username in self.db.keys()

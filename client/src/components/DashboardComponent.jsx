@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Dashboard from "./Dashboard";
 
 function DashboardComponent() {
-    // const data_one = { currency: "BTC" };
     const data_one = ["ETH", "BTC"];
     const data_two = ["BTC", "ETH"];
 
@@ -15,7 +14,7 @@ function DashboardComponent() {
                     <a href="/new">new dashboard</a>
                 </div>
 
-                <div className=''>
+                <div>
                     <label htmlFor="search">Search</label>
                     <input
                         type="text"
@@ -39,7 +38,7 @@ function DashboardComponent() {
             </StyledHeader>
 
             <div className="list-none">
-                <h2 className='font-bold text-lg pl-8 mt-4 my-4'>List of Dashboards</h2>
+                <h2 className='font-bold text-lg pl-16 mt-4 my-4'>List of Dashboards</h2>
                 <StyledDashboardContainer>
                     <Link
                         className="inline-block"

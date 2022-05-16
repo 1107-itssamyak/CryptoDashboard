@@ -34,7 +34,8 @@ const StyledTitle = styled.div`
 const StyledContent = styled.div`
     text-align: center;
     padding: 0rem 2rem;
-    margin-bottom: .5rem; 
+    margin-bottom: .5rem;
+    height: 11rem;
 `;
 
 export default RecentDashboard;

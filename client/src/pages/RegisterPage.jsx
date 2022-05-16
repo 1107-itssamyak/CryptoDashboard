@@ -19,16 +19,20 @@ function LoginPage() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        axios
-            .get(api_endpoint + `/register`, {
-                withCredentials: true,
-            })
-            .then((response) => {
-                console.log(response.data);
-            });
-
-        // checking from the database whether the user login is authenticated or not
-        // navigate("/");
+        axios({
+            method: 'POST',
+            url: api_endpoint + '/register/',
+            data: {
+                username: inputEmail,
+                password: inputPassword
+            },
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            withCredentials: false,
+        }).then((Response) => {
+            if (Response.status === 201) navigate("/login");
+        });
     }
 
     return (

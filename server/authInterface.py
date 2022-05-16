@@ -25,7 +25,7 @@ class AuthenticationHandler:
 
     def updateDB(self, creds: dict) -> None:
         uID = creds["username"]
-        pwrd = creds["pwrd"]
+        pwrd = creds["pwrd"].encode("utf8")
         self.db[uID.lower()] = pwrd
 
     async def saveDB(self) -> None:
@@ -37,10 +37,10 @@ class AuthenticationHandler:
     @staticmethod
     async def encryptString(password: str) -> str:
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, partial(hashpw, password, gensalt()))
+        return await loop.run_in_executor(None, partial(hashpw, password.encode("utf8"), gensalt()))
 
     async def newUser(self, creds: dict) -> None:
-        self.db[creds["username"]] = await self.encryptString(creds["password"])
+        self.db[creds["username"]] = await self.encryptString(creds["password"].encode("utf8"))
 
     def checkExistingUser(self, username: str) -> bool:
         return username in self.db.keys()
@@ -51,7 +51,7 @@ class AuthenticationHandler:
         if self.checkExistingUser(uID) is False:
             return None
 
-        pwrd = creds["password"]
+        pwrd = creds["password"].encode("utf8")
         savedPwrd = self.db[uID]
         return await loop.run_in_executor(None, partial(checkpw, pwrd, savedPwrd))
 

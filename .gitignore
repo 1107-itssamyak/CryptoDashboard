@@ -4,3 +4,5 @@ secrets.json
 test_main.py
 __pycache__
 .pytest_cache
+temp.py
+userDB.json

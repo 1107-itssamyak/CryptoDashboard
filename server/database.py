@@ -14,16 +14,19 @@ class DatabaseInterface:
         return models.UserProfileModel.parse_obj(self.database[username])
 
     def newUserProfile(self, username: str):
-        userData = models.UserProfileModel(username=username,
-                                           dashboardList=[],
-                                           amount=0,
-                                           metricData=models.UserMetricsModel())
+        userData = models.UserProfileModel(
+            username=username,
+            dashboardList=[],
+            amount=0,
+            metricData=models.UserMetricsModel())
         self.database[username] = userData.dict()
 
-    def updateUserProfile(self, username: str, userData: models.UserProfileModel):
+    def updateUserProfile(self, username: str,
+                          userData: models.UserProfileModel):
         self.database[username] = userData.dict()
 
-    def newDashboard(self, username: str, dataNew: models.DashboardModel) -> Union[bool, None]:
+    def newDashboard(self, username: str,
+                     dataNew: models.DashboardModel) -> Union[bool, None]:
         userData = self.getUserProfile(username)
 
         for dashboard in userData.dashboardList:
@@ -35,7 +38,8 @@ class DatabaseInterface:
         self.updateUserProfile(username, userData)
         return True
 
-    def fetchDashboard(self, username: str, dashboardID: str) -> Union[models.DashboardModel, None]:
+    def fetchDashboard(self, username: str,
+                       dashboardID: str) -> Union[models.DashboardModel, None]:
         userData = self.getUserProfile(username)
 
         query = None

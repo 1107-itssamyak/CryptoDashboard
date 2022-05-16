@@ -12,6 +12,15 @@ class AuthenticationHandler:
         self.db = self.loadDB()
         self.scheduler = AsyncIOScheduler()
 
+    @staticmethod
+    def enforceUTF8(s) -> bytes:
+        if type(s) is bytes:
+            pass
+        elif type(s) is str:
+            s = s.encode("utf8")
+
+        return s
+
     def loadDB(self) -> dict:
         dbPath = os.path.join("db", "userDB.json")
         dbDict = None
@@ -25,22 +34,28 @@ class AuthenticationHandler:
 
     def updateDB(self, creds: dict) -> None:
         uID = creds["username"]
-        pwrd = creds["pwrd"].encode("utf8")
+        pwrd = AuthenticationHandler.enforceUTF8(creds["pwrd"])
         self.db[uID.lower()] = pwrd
 
     async def saveDB(self) -> None:
         loop = asyncio.get_event_loop()
         dbPath = os.path.join("db", "userDB.json")
         with open(dbPath, "w") as database:
-            await loop.run_in_executor(None, partial(json.dump, self.db, database, indent=4))
+            await loop.run_in_executor(
+                None, partial(json.dump, self.db, database, indent=4))
+        print("Database saved")
 
     @staticmethod
     async def encryptString(password: str) -> str:
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, partial(hashpw, password.encode("utf8"), gensalt()))
+        password = AuthenticationHandler.enforceUTF8(password)
+        return await loop.run_in_executor(None,
+                                          partial(hashpw, password, gensalt()))
 
     async def newUser(self, creds: dict) -> None:
-        self.db[creds["username"]] = await self.encryptString(creds["password"].encode("utf8"))
+        uname = creds["username"]
+        pwrd = AuthenticationHandler.enforceUTF8(creds["password"])
+        self.db[uname] = await self.encryptString(pwrd)
 
     def checkExistingUser(self, username: str) -> bool:
         return username in self.db.keys()
@@ -51,9 +66,10 @@ class AuthenticationHandler:
         if self.checkExistingUser(uID) is False:
             return None
 
-        pwrd = creds["password"].encode("utf8")
+        pwrd = AuthenticationHandler.enforceUTF8(creds["password"])
         savedPwrd = self.db[uID]
-        return await loop.run_in_executor(None, partial(checkpw, pwrd, savedPwrd))
+        return await loop.run_in_executor(None,
+                                          partial(checkpw, pwrd, savedPwrd))
 
     async def runDB(self) -> None:
         self.scheduler.add_job(self.saveDB, "interval", seconds=1200)

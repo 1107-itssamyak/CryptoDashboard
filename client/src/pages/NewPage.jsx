@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import CurrencyContainer from '../components/CurrencyContainer.jsx';
 
 function NewPage() {
@@ -33,60 +34,100 @@ function NewPage() {
 
     return (
         <>
-            <div className="home">
-                <NavLink to={"/"}>home</NavLink>
-            </div>
-
-            <br />
-            <div className="cancel">
-                <NavLink to={"/"}>cancel</NavLink>
-            </div>
-
-            <br />
-            <div className="completed">
-                <a href="/">done</a>
-            </div>
-
-            <div className="dashboardname">
-                Name of Dashboard Page
-                <input type="text" value={dashboardName} onChange={(e) => handleChange(e, setdashboardName)} />
-            </div>
-
-            <br />
-            {dashboardName ? dashboardName : null}
-
-            <div className="currencies">
-                List of Currencies:
-                {currencyList.map((currency, i) =>
-                    <CurrencyContainer key={i} name={currency} />
-                )}
+            <div className='flex flex-row justify-between m-4 mt-8 py-4'>
                 <div>
+                    <h1 className='font-bold pl-8 italic text-lg'>Create New Dashboard</h1>
+                </div>
+
+                <div className='flex flex-row'>
+                    <StyledButtonContainer>
+                        <NavLink to={"/"}>Cancel</NavLink>
+                    </StyledButtonContainer>
+                    <StyledButtonContainer>
+                        <NavLink to={"/"}>Done</NavLink>
+                    </StyledButtonContainer>
+                </div>
+            </div>
+
+            <StyledWrapper>
+                <StyledContainer className="dashboardname">
+                    Name for Dashboard:
+                    <input type="text" value={dashboardName} onChange={(e) => handleChange(e, setdashboardName)} />
+                </StyledContainer>
+
+                {/* display name of the new dashboard if it exists otherwise not */}
+                {dashboardName ? dashboardName : null}
+
+                <StyledContainer>
                     Enter currency:
                     <input type="text" value={currencyName} onChange={(e) => handleChange(e, setCurrencyName)} />
-                </div>
-                <div className="container"></div>
-            </div>
+                </StyledContainer>
 
-            <br />
-            {checkName
-                && <div>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            Currency Worth
-                            <input type="text" value={currencyWorth} onChange={(e) => handleChange(e, setCurrencyWorth)} />
-                        </div>
-                        <div>
-                            Toggle: Persistance
-                            <input type="checkbox" checked={toggle} onChange={(e) => handleChange(e, setToggle)} />
-                        </div>
-                        <div>
-                            <button type="submit">submit</button>
-                        </div>
-                    </form>
+                <div className='mt-4'>
+                    List of Currencies:
+                    {currencyList.map((currency, i) =>
+                        <CurrencyContainer key={i} name={currency} />
+                    )}
                 </div>
-            }
+
+                {checkName &&
+                    <div className='p-4 border-2 my-4 inline-block font-semibold rounded-l'>
+                        <form onSubmit={handleSubmit}>
+                            <StyledContainer>
+                                Currency Worth:
+                                <input type="text" className='ml-1' value={currencyWorth} onChange={(e) => handleChange(e, setCurrencyWorth)} />
+                            </StyledContainer>
+
+                            <div className='my-2'>
+                                Toggle: Persistance
+                                <input type="checkbox" className='ml-2' checked={toggle} onChange={(e) => handleChange(e, setToggle)} />
+                            </div>
+
+                            <StyledButtonContainer>
+                                <button type="submit">submit</button>
+                            </StyledButtonContainer>
+                        </form>
+                    </div>
+                }
+            </StyledWrapper>
         </>
     )
 }
+
+const StyledButtonContainer = styled.div`
+    padding-right: 2rem;
+    margin-top: .75rem;
+    a, button{
+        cursor: pointer;
+        text-transform: capitalize;
+        border-radius: .5rem;
+        padding: .5rem 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        &:hover{
+            background-color: #e0e0e0;
+            color: black;
+        }
+    }
+`;
+
+const StyledContainer = styled.div`
+    margin-top: 1rem;
+    input{
+        margin-inline: 1rem;
+        width: 16rem;
+        border: 2px solid #e0e0e0;
+        border-radius: .25rem;
+        padding: .25rem .5rem;
+
+        &:nth-child(2n){
+            margin-bottom: 1rem;
+        }
+    }
+`;
+
+const StyledWrapper = styled.div`
+    padding-top: 2rem;
+    margin-inline: 2rem;
+`;
 
 export default NewPage;

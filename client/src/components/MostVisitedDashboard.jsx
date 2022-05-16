@@ -26,8 +26,8 @@ const StyledTitle = styled.div`
     h3{
         border-radius: .5rem;
         padding: .25rem 1rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
         font-weight: 700;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     }
 `;
 
@@ -35,6 +35,7 @@ const StyledContent = styled.div`
     text-align: center;
     padding: 0rem 2rem;
     margin-bottom: .5rem;
+    height: 11rem;
 `;
 
 export default MostVisitedDashboard;

@@ -40,7 +40,8 @@ const StyledDiv = styled.div`
     ul li{
         text-align: center;
         border: 2px solid;
-        width: 5rem;
+        width: 4rem;
+        font-size: 90%;
         border-radius: .25rem;
         margin: .5rem;
 

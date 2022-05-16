@@ -9,7 +9,6 @@ cmcHandlerInstance = CoinAPIHandler()
 authHandlerInstance = AuthenticationHandler()
 userHandlerInstance = UserHandler()
 
-
 @app.on_event("startup")
 async def onStart():
     #cmcHandlerInstance.startUpdater()

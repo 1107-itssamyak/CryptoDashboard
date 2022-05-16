@@ -1,0 +1,6 @@
+secrets.json
+.vscode
+.style.yapf
+test_main.py
+__pycache__
+.pytest_cache

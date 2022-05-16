@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardComponent from "../components/DashboardComponent";
 import MostVisitedDashboard from "../components/MostVisitedDashboard";
 import ProfileStat from "../components/ProfileStat";
 import RecentDashboard from "../components/RecentDashboard";
 
+import axios from 'axios';
+
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
 
 function HomePage() {
+    const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
+
+    // useEffect(() => {
+    //     axios
+    //         .get(api_endpoint + `/`, {
+    //             withCredentials: true,
+    //         })
+    //         .then((response) => {
+    //             // setQuestionData(response.data);
+    //         });
+    // }, []);
+
     return (
         <div className='flex flex-col'>
             <div>

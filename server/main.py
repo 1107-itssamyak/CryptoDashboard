@@ -26,14 +26,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.on_event("startup")
 async def onStart():
     #cmcHandlerInstance.startUpdater()
     await authHandlerInstance.runDB()
 
 
-@app.get("/{token}", status_code=201, response_model=models.UserProfileModel)
+@app.get("/home/{token}", status_code=201, response_model=models.UserProfileModel)
 async def root(token: str):
     check = userHandlerInstance.checkIfSession(token)
     if check is False:

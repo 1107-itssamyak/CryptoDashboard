@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -5,6 +6,8 @@ import styled from "styled-components";
 import wave_vector from "../svg/wave-vector.svg";
 
 function LoginPage() {
+    const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
+
     const navigate = useNavigate();
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
@@ -16,8 +19,20 @@ function LoginPage() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        // checking from the database whether the user login is authenticated or not
-        navigate("/");
+        axios({
+            method: 'POST',
+            url: api_endpoint + '/register/',
+            data: {
+                username: inputEmail,
+                password: inputPassword
+            },
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            withCredentials: false,
+        }).then((Response) => {
+            if (Response.status === 201) navigate("/login");
+        });
     }
 
     return (

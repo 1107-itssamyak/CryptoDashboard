@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/1107-itssamyak/CryptoDashboard/issues"
   },
-  "homepage": "https://github.com/1107-itssamyak/CryptoDashboard#readme"
+  "homepage": "https://github.com/1107-itssamyak/CryptoDashboard#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  }
 }

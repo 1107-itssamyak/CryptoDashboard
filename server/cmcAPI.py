@@ -13,21 +13,33 @@ class CoinAPIHandler:
         self.session = requests.Session()
         self.latestCache = None
         self.historyCache = None
+        self.currencyMap = dict()
 
         with open("secrets.json", "r") as secrets:
             self.apiKey = json.load(secrets)["key"]
         headers = {"Accepts": "application/json", "X-CMC_PRO_API_KEY": f"{self.apiKey}"}
 
         self.session.headers.update(headers)
-        self.url = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+        self.url = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/"
 
     async def updateCache(self):
         loop = asyncio.get_event_loop()
         parameters = {'start': '1', 'limit': '5000', 'convert': 'USD'}
         try:
             response = await loop.run_in_executor(
-                None, partial(self.session.get, self.url, params=parameters))
+                None,
+                partial(self.session.get, "".join(self.url, "listings/latest"), params=parameters))
             self.latestCache = json.loads(response.text)
+            print("Cache updated")
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+    async def updateMap(self):
+        loop = asyncio.get_event_loop()
+        try:
+            response = await loop.run_in_executor(
+                None, partial(self.session.get, "".join(self.url, "map/")))
+            self.currencyMap = json.loads(response.text)
             print("Cache updated")
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)

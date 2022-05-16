@@ -37,7 +37,7 @@ class UserProfileModel(BaseModel):
     username: str
     dashboardList: List[DashboardModel] = []
     amount: Union[float, None] = None
-    metricData: UserMetricsModel
+    metricData: Union[UserMetricsModel, None] = None
 
 
 class UserSessionModel(BaseModel):

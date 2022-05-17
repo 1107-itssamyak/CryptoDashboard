@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function ProfileStat() {
+function ProfileStat({ amount, mode }) {
     return (
         <StyledDiv>
             <h3>Profile Stat</h3>
             <div className="worth">
                 <span>Net worth: </span>
-                <span className="worth_value"> &#36;1000</span>
+                <span className="worth_value"> &#36;{amount}</span>
             </div>
             <div className="curreny">Currency: <span>USD</span>
+            </div>
+            <div className="curreny">Mode: <span>{!mode ? "Light Mode" : "Dark Mode"}</span>
             </div>
 
             {/* //? theme toggle can added here, if need is required over here (connect context api first)

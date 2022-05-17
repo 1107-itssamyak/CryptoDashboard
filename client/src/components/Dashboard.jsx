@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 
 import styled from 'styled-components';
 
-function Dashboard(props) {
+function Dashboard({ data }) {
     const location = useLocation();
     let currency;
     if (location.state)
@@ -14,7 +14,7 @@ function Dashboard(props) {
             <h3>DashboardComponent Name</h3>
             <ul>
                 {currency !== undefined && <li className='font-bold'>{currency}</li>}
-                {props.data.map((d, i) => <li key={i}>{d}</li>)}
+                {data.map((d, i) => <li key={i}>{d}</li>)}
             </ul>
         </StyledDiv>
     )

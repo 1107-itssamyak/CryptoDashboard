@@ -10,10 +10,12 @@ import { useState } from "react";
 import Context from "./Context";
 
 function App() {
-    const [userObject, setUserObject] = useState(null);
+    let localuserObject = localStorage.getItem("localuserObject");
+    const [userObject, setUserObject] = useState(localuserObject);
 
     function setUserObjectFunc(token) {
         setUserObject(token);
+        localStorage.setItem("localuserObject", token);
     }
 
     return (

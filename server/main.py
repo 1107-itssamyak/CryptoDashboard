@@ -29,8 +29,8 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def onStart():
-    # await cmcHandlerInstance.updateCache()
-    # cmcHandlerInstance.startUpdater()
+    await cmcHandlerInstance.updateCache()
+    cmcHandlerInstance.startUpdater()
     await authHandlerInstance.runDB()
 
 
@@ -101,21 +101,21 @@ async def logout(token: str):
     return {"response": "success"}
 
 
-@app.put("/new/{token}", status_code=201)
-async def newDashboard(token: str, dashboard: models.DashboardModel):
-    check = userHandlerInstance.checkIfSession(token)
+@app.post("/new/", status_code=201)
+async def newDashboard(dashboard: models.NewDashboardModel):
+    check = userHandlerInstance.checkIfSession(dashboard.token)
     if check is False:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail="session already expired")
 
-    verificationStatus = CoinAPIHandler.verifyDashboard(dashboard)
+    verificationStatus = CoinAPIHandler.verifyDashboard(dashboard.dashboard)
     if verificationStatus is False:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE,
                             detail="unknown currency in dashboard")
 
-    username = userHandlerInstance.fetchUserSession(token)
+    username = userHandlerInstance.fetchUserSession(dashboard.token)
 
-    response = userHandlerInstance.database.newDashboard(username, dashboard)
+    response = userHandlerInstance.database.newDashboard(username, dashboard.dashboard)
 
     if response is False:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE,

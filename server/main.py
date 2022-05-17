@@ -46,7 +46,7 @@ async def root(token: str):
     username = userHandlerInstance.fetchUserSession(token)
 
     response = userHandlerInstance.database.getUserProfile(username)
-    CoinAPIHandler.updateProfile(response)
+    cmcHandlerInstance.updateProfile(response)
 
     return response
 

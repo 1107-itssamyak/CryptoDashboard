@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Dashboard from "./Dashboard";
 
-function DashboardComponent() {
-    const data_one = ["ETH", "BTC"];
-    const data_two = ["BTC", "ETH"];
+function DashboardComponent({ dashboardList }) {
+    // const data_one = ["ETH", "BTC"];
+    // const data_two = ["BTC", "ETH"];
 
     return (
         <StyledContainer>
@@ -15,7 +15,7 @@ function DashboardComponent() {
                 </div>
 
                 <div>
-                    <label htmlFor="search">Search</label>
+                    <label htmlFor="search" className="mr-2">Search</label>
                     <input
                         type="text"
                         id="search"
@@ -40,7 +40,16 @@ function DashboardComponent() {
             <div className="list-none">
                 <h2 className='font-bold text-lg pl-16 mt-4 my-4'>List of Dashboards</h2>
                 <StyledDashboardContainer>
-                    <Link
+                    {
+                        dashboardList.map((d) => {
+                            return (
+                                <Link to="/dashboard" className="inline-block" state={d.id}>
+                                    <Dashboard data={d.currencyList} id={d.id} />
+                                </Link>
+                            )
+                        })
+                    }
+                    {/* <Link
                         className="inline-block"
                         to="/dashboard"
                         state={data_one}
@@ -82,7 +91,7 @@ function DashboardComponent() {
                         state={data_two}
                     >
                         <Dashboard data={data_two} />
-                    </Link>
+                    </Link> */}
                 </StyledDashboardContainer>
             </div>
         </StyledContainer>

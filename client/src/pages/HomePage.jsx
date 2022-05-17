@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DashboardComponent from "../components/DashboardComponent";
 import MostVisitedDashboard from "../components/MostVisitedDashboard";
 import ProfileStat from "../components/ProfileStat";
@@ -8,19 +8,36 @@ import axios from 'axios';
 
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
+import Context from "../Context";
 
 function HomePage() {
-    const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const [amount, setAmount] = useState(0);
+    const [mode, setMode] = useState(false);
+    const [Name, setName] = useState("Guest User")
 
-    // useEffect(() => {
-    //     axios
-    //         .get(api_endpoint + `/`, {
-    //             withCredentials: true,
-    //         })
-    //         .then((response) => {
-    //             // setQuestionData(response.data);
-    //         });
-    // }, []);
+    const [dashboardList, setdashboardList] = useState([]);
+
+    const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const myContext = useContext(Context);
+
+    useEffect(() => {
+        if (myContext.userObject === null) return;
+
+        axios
+            .get(api_endpoint + `/home/${myContext.userObject}`, {
+                withCredentials: false,
+            })
+            .then((response) => {
+                console.log(response.data);
+
+                // setting user Variables after getting data
+                setAmount(response.data.amount);
+                setMode(response.data.metricData.mode);
+                setName(response.data.username);
+
+                setdashboardList(response.data.dashboardList);
+            });
+    }, [myContext.userObject, api_endpoint]);
 
     return (
         <div className='flex flex-col'>
@@ -37,7 +54,7 @@ function HomePage() {
                             <NavLink to="/register">register</NavLink>
                         </li>
 
-                        <li>Name</li>
+                        <li className="font-bold italic">{Name}</li>
                     </div>
                 </NavbarStyled>
             </div>
@@ -46,9 +63,9 @@ function HomePage() {
                 <StyledLeftSide>
                     <MostVisitedDashboard />
                     <RecentDashboard />
-                    <ProfileStat />
+                    <ProfileStat mode={mode} amount={amount} />
                 </StyledLeftSide>
-                <DashboardComponent />
+                <DashboardComponent dashboardList={dashboardList} />
             </div>
         </div>
     );

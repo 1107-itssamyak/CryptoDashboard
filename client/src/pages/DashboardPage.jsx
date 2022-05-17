@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 function DashboardPage(props) {
     const location = useLocation();
-    let currency;
-    if (location.state)
-        currency = location.state.currency;
+    // let currency;
+    // if (location.state)
+    //     currency = location.state.currency;
 
     return (
         <div>
@@ -15,8 +15,7 @@ function DashboardPage(props) {
             This is new Dashboard page
 
             <ul>
-                {currency !== undefined && <li className='font-bold'>{currency}</li>}
-                {props.data && <li>{props.data.currency}</li>}
+                {location.state && location.state.id}
             </ul>
 
             <div>Graphs 1</div>

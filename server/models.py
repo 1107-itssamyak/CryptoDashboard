@@ -25,6 +25,9 @@ class DashboardModel(BaseModel):
     value: Union[float, None] = None
     amount: Union[float, None] = None
 
+class NewDashboardModel(BaseModel):
+    token: str
+    dashboard: DashboardModel
 
 class UserMetricsModel(BaseModel):
     dashboardFrequency: dict = {}

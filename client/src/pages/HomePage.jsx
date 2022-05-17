@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import DashboardComponent from "../components/DashboardComponent";
 import MostVisitedDashboard from "../components/MostVisitedDashboard";
 import ProfileStat from "../components/ProfileStat";
@@ -8,19 +8,22 @@ import axios from 'axios';
 
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
+import Context from "../Context";
 
 function HomePage() {
     const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const myContext = useContext(Context);
 
-    // useEffect(() => {
-    //     axios
-    //         .get(api_endpoint + `/`, {
-    //             withCredentials: true,
-    //         })
-    //         .then((response) => {
-    //             // setQuestionData(response.data);
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(api_endpoint + `/home/${myContext.userObject}`, {
+                withCredentials: false,
+            })
+            .then((response) => {
+                console.log(response);
+                // setQuestionData(response.data);
+            });
+    }, [myContext.userObject]);
 
     return (
         <div className='flex flex-col'>

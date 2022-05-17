@@ -29,8 +29,8 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def onStart():
-    await cmcHandlerInstance.updateCache()
-    cmcHandlerInstance.startUpdater()
+    # await cmcHandlerInstance.updateCache()
+    # cmcHandlerInstance.startUpdater()
     await authHandlerInstance.runDB()
 
 

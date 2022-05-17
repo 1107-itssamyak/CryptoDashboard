@@ -1,11 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Context from "../Context";
 import wave_vector from "../svg/wave-vector.svg";
 
 function LoginPage() {
+    const myContext = useContext(Context);
     const api_endpoint = process.env.REACT_APP_API_ENDPOINT;
 
     const navigate = useNavigate();
@@ -31,6 +33,9 @@ function LoginPage() {
             },
             withCredentials: false,
         }).then((Response) => {
+            console.log(Response.data.token);
+            myContext.setUserObjectFunc(Response.data.token);
+
             if (Response.status === 201) navigate("/");
         });
     }
